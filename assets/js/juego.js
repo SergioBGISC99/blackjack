@@ -9,6 +9,15 @@ let deck = [];
 const tipos = ["C", "D", "H", "S"];
 const especiales = ["A", "J", "Q", "K"];
 
+let puntosJugador1 = 0,
+  puntosJugador2 = 0;
+
+//Referencias HTML
+const btnJugar = document.querySelector("#btn-new-game");
+const btnPedir = document.querySelector("#btn-request");
+const btnDetener = document.querySelector("#btn-stop-game");
+const puntosHTML = document.querySelectorAll("small");
+
 // Esta función crea una nueva baraja
 const crearDeck = () => {
   for (let i = 2; i <= 10; i++) {
@@ -34,20 +43,22 @@ const pedirCarta = () => {
   if (deck.length === 0) {
     throw "No hay cartas en el deck";
   }
-
   const carta = deck.pop();
-
-  console.log(deck);
-  console.log(carta);
-
   return carta;
 };
 
+//Asignar valor a carta
 const valorCarta = (carta) => {
   const valor = carta.substring(0, carta.length - 1);
 
   return isNaN(valor) ? (valor === "A" ? 11 : 10) : valor * 1;
 };
 
-const valor = valorCarta(pedirCarta());
-console.log(valor);
+//Eventos
+btnPedir.addEventListener("click", () => {
+  const carta = pedirCarta();
+  puntosJugador1 += valorCarta(carta);
+  puntosHTML[0].innerText = puntosJugador1;
+
+  
+});
