@@ -35,6 +35,7 @@ const crearDeck = () => {
     }
   }
   deck = _.shuffle(deck);
+  console.log(deck);
   return deck;
 };
 
@@ -110,4 +111,19 @@ btnDetener.addEventListener("click", () => {
   btnPedir.disabled = true;
   btnDetener.disabled = true;
   turnoJugador2(puntosJugador1);
+});
+
+btnJugar.addEventListener("click", () => {
+  console.clear();
+  deck = [];
+  crearDeck();
+  puntosJugador1 = 0;
+  puntosJugador2 = 0;
+  puntosHTML[0].innerText = puntosJugador1;
+  puntosHTML[1].innerText = puntosJugador2;
+
+  btnPedir.disabled = false;
+  btnDetener.disabled = false;
+  divCartasJugador.innerHTML = "";
+  divCartasRival.innerHTML = "";
 });
