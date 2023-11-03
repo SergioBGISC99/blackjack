@@ -73,6 +73,13 @@ const turnoJugador2 = (puntosMinimos) => {
       break;
     }
   } while (puntosJugador2 < puntosMinimos && puntosMinimos <= 21);
+
+  setTimeout(() => {
+    if (puntosJugador2 === puntosMinimos) alert("Empate 😢");
+    else if (puntosMinimos > 21) alert("Gana el jugador 2 😖");
+    else if (puntosJugador2 > 21) alert("Has ganado 🥳");
+    else alert("Gana el jugador 2 😖");
+  }, 100);
 };
 
 // Eventos
