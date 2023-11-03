@@ -19,6 +19,7 @@ const btnDetener = document.querySelector("#btn-stop-game");
 const puntosHTML = document.querySelectorAll("small");
 
 const divCartasJugador = document.querySelector("#jugador-cartas");
+const divCartasRival = document.querySelector("#computadora-cartas");
 
 // Esta función crea una nueva baraja
 const crearDeck = () => {
@@ -40,7 +41,7 @@ const crearDeck = () => {
 
 crearDeck();
 
-//Esta función me permite tomar una carta
+// Esta función me permite tomar una carta
 const pedirCarta = () => {
   if (deck.length === 0) {
     throw "No hay cartas en el deck";
@@ -49,14 +50,33 @@ const pedirCarta = () => {
   return carta;
 };
 
-//Asignar valor a carta
+// Asignar valor a carta
 const valorCarta = (carta) => {
   const valor = carta.substring(0, carta.length - 1);
 
   return isNaN(valor) ? (valor === "A" ? 11 : 10) : valor * 1;
 };
 
-//Eventos
+// Turno de jugador 2
+const turnoJugador2 = (puntosMinimos) => {
+  do {
+    const carta = pedirCarta();
+    puntosJugador2 += valorCarta(carta);
+    puntosHTML[1].innerText = puntosJugador2;
+
+    const imgCarta = document.createElement("img");
+    imgCarta.src = `assets/cartas/${carta}.png`;
+    imgCarta.classList.add("carta");
+
+    divCartasRival.append(imgCarta);
+
+    if (puntosMinimos > 21) {
+      break;
+    }
+  } while (puntosJugador2 < puntosMinimos && puntosMinimos <= 21);
+};
+
+// Eventos
 btnPedir.addEventListener("click", () => {
   const carta = pedirCarta();
   puntosJugador1 += valorCarta(carta);
@@ -70,8 +90,18 @@ btnPedir.addEventListener("click", () => {
   if (puntosJugador1 > 21) {
     console.warn("Has perdido");
     btnPedir.disabled = true;
+    btnDetener.disabled = true;
+    turnoJugador2(puntosJugador1);
   } else if (puntosJugador1 === 21) {
     console.warn("¿21? Genial");
     btnPedir.disabled = true;
+    btnDetener.disabled = true;
+    turnoJugador2(puntosJugador1);
   }
+});
+
+btnDetener.addEventListener("click", () => {
+  btnPedir.disabled = true;
+  btnDetener.disabled = true;
+  turnoJugador2(puntosJugador1);
 });
