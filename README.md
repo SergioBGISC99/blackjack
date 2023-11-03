@@ -5,9 +5,7 @@ Welcome to my Blackjack game project! This repository hosts the source code and 
 
 **Features:**
 
-- Play a traditional game of Blackjack against a computer dealer.
-- Implement common rules such as hitting, standing, splitting, and doubling down.
-- Experience a visually appealing user interface with a responsive design.
+- Play a traditional game of Blackjack against a computer dealer and a computer player.
 - Challenge yourself and see if you can beat the house!
 
 **How to Play:**
